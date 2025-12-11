@@ -1,2 +1,2 @@
-export * from './tracking/eventTypes';
+export * from './tracking';
 export * from './store/types';
