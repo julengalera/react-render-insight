@@ -1,6 +1,13 @@
+// selectors.ts: Pure “queries” (read-only, no side effects)
+//
+// Selectors are functions that do not mutate state.
+// They only read from it and return something useful.
 import type { RenderInsightState, RenderEvent, ComponentStats, GlobalStats, TimelinePoint } from './types';
 import type { ComponentId } from '../tracking/eventTypes';
 
+// getComponentKey(componentId)
+//
+// Builds a stable string key used to index data by component.
 export function getComponentKey(componentId: ComponentId): string {
     const base = componentId.displayName ?? 'Unknown';
     const path = componentId.path ?? '';
@@ -8,10 +15,16 @@ export function getComponentKey(componentId: ComponentId): string {
     return [base, path, instance].filter(Boolean).join('::');
 }
 
+// selectAllEvents
+//
+// Iterates over allEventIds and looks up each event in eventsById.
 export function selectAllEvents(state: RenderInsightState): RenderEvent[] {
     return state.allEventIds.map((id) => state.eventsById[id]).filter(Boolean);
 }
 
+// selectTimeline
+//
+// Returns a lightweight representation of events: TimelinePoint.
 export function selectTimeline(state: RenderInsightState): TimelinePoint[] {
     return state.allEventIds.map((id) => {
         const event = state.eventsById[id];
@@ -24,6 +37,9 @@ export function selectTimeline(state: RenderInsightState): TimelinePoint[] {
     });
 }
 
+// selectComponentEvents
+//
+// Uses componentKey to retrieve event ids for a specific component.
 export function selectComponentEvents(
     state: RenderInsightState,
     componentId: ComponentId,
