@@ -16,6 +16,9 @@ export function shallowDiff(
     next: Record<string, unknown>,
     config: DiffConfig,
 ): DiffResult {
+    //TODO: Implement shallow diff logic
+    console.log('shallowDiff prev and next', prev, next);
+
     return {
         mode: config.mode,
         changed: [],

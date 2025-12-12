@@ -17,6 +17,9 @@ export function deepDiff(
     next: Record<string, unknown>,
     config: DeepDiffConfig,
 ): DiffResult {
+    //TODO: Implement deep diff logic
+    console.log('deepDiff prev and next', prev, next);
+
     return {
         mode: config.mode,
         changed: [],
@@ -25,3 +28,4 @@ export function deepDiff(
         truncated: true,
     };
 }
+
