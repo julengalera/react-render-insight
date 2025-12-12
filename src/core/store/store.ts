@@ -1,3 +1,6 @@
+// store.ts: Minimal Zustand/Redux-lite style store (no middleware, no magic)
+//
+// Defines a small store interface
 import type { RenderEvent, RenderInsightState, ComponentStats, GlobalStats, TimelinePoint } from './types';
 
 export interface RenderInsightStore {
@@ -11,6 +14,9 @@ export interface RenderInsightStoreOptions {
     initialState?: RenderInsightState;
 }
 
+// createRenderInsightStore()
+//
+// Creates a store instance
 export function createRenderInsightStore(
     options: RenderInsightStoreOptions = {},
 ): RenderInsightStore {
@@ -47,6 +53,7 @@ export function createRenderInsightStore(
                 listeners.delete(listener);
             };
         },
+        //TODO: Implement actual event addition logic
         addEvent(_event: RenderEvent) {
             notify();
         },

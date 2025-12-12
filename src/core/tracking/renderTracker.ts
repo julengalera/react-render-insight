@@ -1,8 +1,14 @@
+// renderTracker.ts: Convert “a render happened” into a RenderEvent
+//
+// This module sits between the React adapter and the store.
 import type { ComponentId, DiffMode, DiffResult, RenderReason } from './eventTypes';
 import type { RenderEvent } from '../store/types';
 import { shallowDiff, type DiffConfig } from '../diff/shallowDiff';
 import { deepDiff, type DeepDiffConfig } from '../diff/deepDiff';
 
+// TrackingOptions
+//
+// Global configuration for render tracking.
 export interface TrackingOptions {
     enabled: boolean;
     diffMode: DiffMode;
@@ -10,6 +16,9 @@ export interface TrackingOptions {
     maxDiffDepth?: number;
 }
 
+// RenderTrackerInput
+//
+// Data provided by the React adapter on every render.
 export interface RenderTrackerInput {
     componentId: ComponentId;
     prevProps?: Record<string, unknown>;
@@ -18,11 +27,17 @@ export interface RenderTrackerInput {
     reasonHint?: RenderReason;
 }
 
+// TrackRenderResult
+//
+// Return value of the tracker.
 export interface TrackRenderResult {
     event: RenderEvent;
     diff?: DiffResult;
 }
 
+// computeDiff()
+//
+// Strategy router for diff computation.
 function computeDiff(
     prevProps: Record<string, unknown> | undefined,
     nextProps: Record<string, unknown>,
@@ -51,6 +66,9 @@ function computeDiff(
     return undefined;     
 }
 
+// inferRenderReason()
+//
+// Attempts to infer why a render occurred.
 function inferRenderReason(
     input: RenderTrackerInput,
     diff: DiffResult | undefined,
@@ -68,6 +86,9 @@ function inferRenderReason(
     return 'unknown';
 }
 
+// trackRender()
+//
+// Public entry point used by the React adapter.
 export function trackRender(
     input: RenderTrackerInput,
     options: TrackingOptions,

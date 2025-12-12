@@ -1,9 +1,16 @@
+// eventTypes.ts: Shared vocabulary for tracking, diffing, and the store
+//
+// This file defines the common types used across the system.
+
 export type RenderReason = 'props-change' | 'state-change' | 'context-change' | 'parent-rerender' | 'unknown';
 
 export type DiffMode = 'none' | 'shallow' | 'deep';
 
 export type ComponentPath = string; 
 
+// ComponentId
+//
+// Identifies a component instance.
 export interface ComponentId {
   displayName: string;
   path?: ComponentPath;
@@ -26,6 +33,9 @@ export interface PropRemoved {
   value: unknown;
 }
 
+// DiffResult
+//
+// Normalized output of a props diff.
 export interface DiffResult {
   mode: DiffMode;
   changed: PropChange[];

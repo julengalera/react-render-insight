@@ -68,3 +68,28 @@ This way:
 
 - The **core** can change its internal structure without breaking the UI.
 - The **UI** only needs to know high-level types (events, timeline, stats).
+
+## React Integration Layer (react-adapter)
+
+The `react-adapter` layer connects React with the tracking core and the store.
+
+### RenderInsightProvider
+
+Responsibilities:
+
+- Create an instance of `RenderInsightStore`.
+- Provide:
+  - The store via `RenderInsightStoreContext`.
+  - The tracking configuration via `RenderInsightConfigContext`.
+- Allow configuration of:
+  - `enabled`
+  - `diffMode`
+  - `maxChanges`
+  - `maxDiffDepth`
+
+Usage:
+
+```tsx
+<RenderInsightProvider config={{ diffMode: 'shallow', enabled: true }}>
+  <App />
+</RenderInsightProvider>

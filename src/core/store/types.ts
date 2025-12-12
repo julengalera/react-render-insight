@@ -1,5 +1,11 @@
+// types.ts: The contract (the one thing that should never lie)
+//
+// This file defines the data shapes that the entire system promises to respect.
 import type { ComponentId, DiffResult, RenderReason } from '../tracking/eventTypes';
 
+// RenderEvent
+//
+// Represents “a render happened” in a persistable format.
 export interface RenderEvent {
     id: string;
     timestamp: number;
@@ -31,6 +37,9 @@ export interface TimelinePoint {
     renderIndexForComponent: number;
 }
 
+// RenderInsightState
+//
+// Normalized shape of the application state.
 export interface RenderInsightState {
     eventsById: Record<string, RenderEvent>;
     eventsByComponentId: Record<string, string[]>;
