@@ -75,12 +75,17 @@ function inferRenderReason(
 ): RenderReason {
     if (input.reasonHint) return input.reasonHint;
 
-    if (!input.prevProps && input.nextProps) {
+    if (!input.prevProps) {
         return 'unknown';
     }
 
-    if (diff && diff.changed.length + diff.added.length + diff.removed.length > 0) {
-        return 'props-change';
+    if (diff) {
+        const total =
+        diff.changed.length + diff.added.length + diff.removed.length;
+
+        if (total > 0) return 'props-change';
+
+        return 'parent-rerender';
     }
 
     return 'unknown';
