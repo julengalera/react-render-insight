@@ -43,7 +43,7 @@ export default function App() {
 
     return (
         <RenderInsightProvider config={{ enabled: true, diffMode: 'shallow', maxChanges: 50 }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 520px', gap: 12, padding: 12, height: '100vh' }}>
+            <div style={{ display: 'flex', flexDirection: 'row', gap: 12, padding: 12, height: '100vh' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                     <div style={{ border: '1px solid #333', borderRadius: 8, padding: 12 }}>
                         <div style={{ fontWeight: 700 }}>Playground</div>
