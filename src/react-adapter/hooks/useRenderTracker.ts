@@ -12,6 +12,7 @@ export function useRenderTracker(
     meta: ComponentMeta,
     props: Record<string, unknown>,
     reasonHint?: RenderReason,
+    consumeStateChangeFlag?: () => boolean,
 ): void {
     const store = useRenderInsightStore();
     const config = useContext(RenderInsightConfigContext);
@@ -20,6 +21,11 @@ export function useRenderTracker(
     const renderIndexRef = useRef(0);
 
     useEffect(() => {
+        const hasStateChange = consumeStateChangeFlag?.() ?? false;
+
+        const effectiveReasonHint: RenderReason | undefined =
+            hasStateChange ? 'state-change' : reasonHint;
+
         const effectiveConfig = config ?? { enabled: true, diffMode: 'shallow' as const };
 
         if (effectiveConfig.enabled === false) {
@@ -38,7 +44,7 @@ export function useRenderTracker(
             prevProps: prevPropsRef.current,
             nextProps: props,
             renderIndexForComponent: renderIndexRef.current,
-            reasonHint,
+            reasonHint: effectiveReasonHint
         };
 
         const options: TrackingOptions = {
