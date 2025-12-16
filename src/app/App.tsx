@@ -1,12 +1,17 @@
 import { useMemo, useState } from 'react';
-import { RenderInsightProvider, RenderInsightPanel, useRenderTracker } from '../index';
+import { RenderInsightProvider, RenderInsightPanel, useRenderTracker, useTrackedState } from '../index';
 
 function CounterCard() {
-    const [count, setCount] = useState(0);
+    const [count, setCount, consumeStateChange] = useTrackedState(
+        { displayName: 'CounterCard', path: 'Playground > CounterCard' },
+        0
+    );
 
     useRenderTracker(
         { displayName: 'CounterCard', path: 'Playground > CounterCard' },
-        { count }
+        { count },
+        undefined,
+        consumeStateChange
     );
 
     return (
