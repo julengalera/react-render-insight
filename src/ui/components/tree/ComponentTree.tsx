@@ -49,7 +49,7 @@ export function ComponentTree({ nodes, selectedKey, onSelect }: ComponentTreePro
                     }}
                 />
                 {!isCollapsed && hasChildren ? (
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                    <div style={{ display: 'flex', flexDirection: 'column' }}>
                         {n.children.map((c) => renderNode(c, depth + 1))}
                     </div>
                 ) : null}
