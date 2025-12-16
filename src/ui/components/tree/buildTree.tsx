@@ -24,13 +24,16 @@ function normalizePath(path?: string): string[] {
         .filter(Boolean);
 }
 
+/** 
 function mergeRenders(parent: TreeNodeVM, child: TreeNodeVM) {
     parent.renders += child.renders;
 }
+*/
 
 export function buildComponentTree(nodes: FlatComponentNode[]): TreeNodeVM[] {
     const root: Record<string, TreeNodeVM> = {};
 
+    /*
     const getOrCreate = (
         map: Record<string, TreeNodeVM>,
         key: string,
@@ -40,7 +43,7 @@ export function buildComponentTree(nodes: FlatComponentNode[]): TreeNodeVM[] {
             map[key] = { key, label, renders: 0, children: [] };
         }
         return map[key];
-    };
+    }; */
 
     const index = new Map<string, TreeNodeVM>();
 
