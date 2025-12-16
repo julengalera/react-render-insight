@@ -54,7 +54,7 @@ export function RenderInsightPanel() {
             left={
                 <ComponentTree
                     nodes={treeNodes}
-                    selectedKey={selectedComponent ? componentIdToKey(selectedComponent) : undefined}
+                    selectedKey={selectedComponent?.path ? `path::${selectedComponent.path}` : undefined}
                     onSelect={(id) => {
                         setSelectedComponent(id);
                         setSelectedEventId(null);
