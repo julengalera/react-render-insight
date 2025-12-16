@@ -30,7 +30,7 @@ export function TreeNode({
     const indent = depth * 12;
 
     return (
-        <div style={{ display: 'flex', alignItems: 'stretch', gap: 6 }}>
+        <div style={{ display: 'flex', alignItems: 'stretch', gap: 6, marginBottom: '6px' }}>
             {collapsible ? (
                 <button
                     onClick={(e) => {
